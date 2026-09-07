@@ -1,4 +1,4 @@
-# @crawlforge/sdk
+# crawlforge-sdk
 
 The official TypeScript SDK for the [CrawlForge REST API](https://www.crawlforge.dev/docs/api-reference):
 30 metered web tools (fetch, scrape, search, crawl, extract, research) behind one API key.
@@ -14,13 +14,13 @@ API keys: https://www.crawlforge.dev/dashboard/keys
 ## Install
 
 ```bash
-npm install @crawlforge/sdk
+npm install crawlforge-sdk
 ```
 
 ## Quick start
 
 ```ts
-import { CrawlForge } from '@crawlforge/sdk';
+import { CrawlForge } from 'crawlforge-sdk';
 
 const client = new CrawlForge({ apiKey: process.env.CRAWLFORGE_API_KEY });
 
@@ -147,7 +147,7 @@ A response that is not JSON (an edge error page) becomes a `CrawlForgeError` wit
 status 0; a per-attempt timeout has code `TIMEOUT`. An `AbortSignal` you pass rejects with its own reason.
 
 ```ts
-import { CrawlForge, InsufficientCreditsError, RateLimitError, ValidationError } from '@crawlforge/sdk';
+import { CrawlForge, InsufficientCreditsError, RateLimitError, ValidationError } from 'crawlforge-sdk';
 
 try {
   await client.fetchUrl({ url: 'not a url' });

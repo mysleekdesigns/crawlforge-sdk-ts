@@ -1,9 +1,9 @@
 {
-  "name": "@crawlforge/sdk",
+  "name": "crawlforge-sdk",
   "version": "0.1.0",
   "description": "Official TypeScript SDK for the CrawlForge REST API: 30 metered web tools behind one API key.",
   "license": "MIT",
-  "author": "CrawlForge <support@crawlforge.dev>",
+  "author": "CrawlForge <simon@crawlforge.dev>",
   "homepage": "https://www.crawlforge.dev/docs/api-reference",
   "repository": {
     "type": "git",

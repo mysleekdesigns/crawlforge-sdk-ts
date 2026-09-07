@@ -1,6 +1,6 @@
 name: Release
 
-# Publishes @crawlforge/sdk to npm when a `v*` tag is pushed, through npm's
+# Publishes crawlforge-sdk to npm when a `v*` tag is pushed, through npm's
 # trusted publishing (GitHub Actions OIDC): no NPM_TOKEN secret anywhere. The
 # package's settings on npmjs.com must list this repository and this file
 # (`release.yml`) as a trusted publisher, with `npm publish` allowed.
