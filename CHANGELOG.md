@@ -4,6 +4,17 @@ All notable changes to `crawlforge-sdk` are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [0.1.1] - 2026-09-07
+
+- Request types regenerated from the corrected OpenAPI specification. Five
+  properties the spec had declared as bare objects were typed
+  `Record<string, never>` in 0.1.0, which rejected every real value at compile
+  time although the API accepted the request: `schema` on `agent()` and
+  `extractWithLlm()` (any JSON Schema object), `extractionOptions.selectors` on
+  `scrapeWithActions()` (a string map), an action's `position` (`{ x, y }`), and
+  the object form of `redact_pii` on `stealthMode()` and `scrapeWithActions()`
+  (`entities`, `replace_style`, `mode`). No runtime change.
+
 ## [0.1.0] - 2026-09-07
 
 Initial release.

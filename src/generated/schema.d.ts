@@ -663,7 +663,9 @@ export interface components {
             /** @description Natural-language task or question (1-2000 chars) */
             prompt: string;
             /** @description Optional JSON schema for structured output */
-            schema?: Record<string, never>;
+            schema?: {
+                [key: string]: unknown;
+            };
             /** @description Optional seed URLs to include (max 20) */
             urls?: unknown[];
         };
@@ -1140,7 +1142,9 @@ export interface components {
              */
             provider?: "openai" | "anthropic" | "ollama" | "auto";
             /** @description Optional JSON-schema for output shape (used as Ollama structured-outputs format when provider is "ollama") */
-            schema?: Record<string, never>;
+            schema?: {
+                [key: string]: unknown;
+            };
             /** @description URL to fetch and extract from (one of url/content required) */
             url?: string;
         };
@@ -1583,7 +1587,10 @@ export interface components {
                 /** @description press: modifier keys (Alt, Control, Meta, Shift) */
                 modifiers?: unknown[];
                 /** @description click/hover: relative position { x, y } */
-                position?: Record<string, never>;
+                position?: {
+                    x?: number;
+                    y?: number;
+                };
                 /** @description screenshot: jpeg quality (0-100) */
                 quality?: number;
                 /** @description Retry attempts for this action (0-5) */
@@ -1677,7 +1684,9 @@ export interface components {
                 /** @default true */
                 includeMetadata?: boolean;
                 /** @description Key-value pairs of data to extract using CSS selectors */
-                selectors?: Record<string, never>;
+                selectors?: {
+                    [key: string]: string;
+                };
             };
             /**
              * @description Output formats: markdown, html, json, text, screenshots
@@ -1712,7 +1721,13 @@ export interface components {
              * @description Remove personal data from the text this call returns, before it is stored or sent back. true is shorthand for { mode: "fast" }: every entity, tagged. As an object: entities (any of EMAIL, PHONE, FINANCIAL, SECRET; omitted or empty means all four, and any other name is a 400 rather than a silent no-op), replace_style ("tag" → <EMAIL>, "mask" → [REDACTED], "remove" → nothing; default "tag") and mode ("fast", the default, is regex-only and costs no extra credits; "model" covers PERSON and LOCATION, needs an LLM and is rejected here — use the CrawlForge MCP server). The response carries redaction: { entities, count, mode } inside data, saying what was removed. Detection is deliberately conservative: a card number must pass Luhn and an IBAN mod-97, so a false positive cannot silently destroy real page content. URLs, queries and identifiers the response uses to name what was fetched are left intact, and counters derived from the text (content_length, word_count, character_count) describe the text as it was extracted, before redaction.
              * @default false
              */
-            redact_pii?: boolean | Record<string, never>;
+            redact_pii?: boolean | {
+                entities?: string[];
+                /** @enum {string} */
+                mode?: "fast" | "model";
+                /** @enum {string} */
+                replace_style?: "tag" | "mask" | "remove";
+            };
             /**
              * @description Respect the target site's robots.txt. Omitted, the compliant default (true) applies: a URL disallowed for CrawlForge is refused before the browser opens and no credits are charged, and every navigate action is checked the same way. Setting this to false is honoured, returns a warning in the response, and is recorded against your API key.
              * @default true
@@ -1823,7 +1838,13 @@ export interface components {
              * @description Remove personal data from the text this call returns, before it is stored or sent back. true is shorthand for { mode: "fast" }: every entity, tagged. As an object: entities (any of EMAIL, PHONE, FINANCIAL, SECRET; omitted or empty means all four, and any other name is a 400 rather than a silent no-op), replace_style ("tag" → <EMAIL>, "mask" → [REDACTED], "remove" → nothing; default "tag") and mode ("fast", the default, is regex-only and costs no extra credits; "model" covers PERSON and LOCATION, needs an LLM and is rejected here — use the CrawlForge MCP server). The response carries redaction: { entities, count, mode } inside data, saying what was removed. Detection is deliberately conservative: a card number must pass Luhn and an IBAN mod-97, so a false positive cannot silently destroy real page content. URLs, queries and identifiers the response uses to name what was fetched are left intact, and counters derived from the text (content_length, word_count, character_count) describe the text as it was extracted, before redaction.
              * @default false
              */
-            redact_pii?: boolean | Record<string, never>;
+            redact_pii?: boolean | {
+                entities?: string[];
+                /** @enum {string} */
+                mode?: "fast" | "model";
+                /** @enum {string} */
+                replace_style?: "tag" | "mask" | "remove";
+            };
             /**
              * @description Respect the target site's robots.txt. Omitted, the compliant default (true) applies: a URL disallowed for CrawlForge is refused before any browser is launched and no credits are charged, and every navigation is checked the same way. The rule is matched against the CrawlForge product token even though the stealth browser presents a randomized User-Agent, so a site owner's "User-agent: CrawlForge" directive binds stealth traffic too. Setting this to false is honoured, returns a warning in the response, and is recorded against your API key.
              * @default true
