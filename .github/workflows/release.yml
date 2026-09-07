@@ -1,5 +1,13 @@
 name: Release
 
+# Publishes @crawlforge/sdk to npm when a `v*` tag is pushed, through npm's
+# trusted publishing (GitHub Actions OIDC): no NPM_TOKEN secret anywhere. The
+# package's settings on npmjs.com must list this repository and this file
+# (`release.yml`) as a trusted publisher, with `npm publish` allowed.
+# Provenance attestations are generated automatically on that path.
+#
+# npm 11.5.1 or later is needed for the OIDC exchange; Node 24 bundles it.
+
 on:
   push:
     tags: ['v*']
@@ -16,7 +24,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
       - name: Tag matches package.json
@@ -39,7 +47,20 @@ jobs:
         run: npm test
       - name: Build
         run: npm run build
+      # A version that is already on the registry (for example a first release
+      # published from a maintainer's machine so the trusted publisher could be
+      # configured) is not an error: the tag still marks it, nothing is re-sent.
+      - name: Already published?
+        id: published
+        run: |
+          name="$(node -p "require('./package.json').name")"
+          version="$(node -p "require('./package.json').version")"
+          if npm view "$name@$version" version >/dev/null 2>&1; then
+            echo "$name@$version is already on npm; skipping publish"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Publish
-        run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        if: steps.published.outputs.skip == 'false'
+        run: npm publish --access public
