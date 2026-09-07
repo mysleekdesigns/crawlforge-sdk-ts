@@ -61,6 +61,11 @@ jobs:
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
+      # npm logs a refused OIDC token exchange only at verbose level and then
+      # publishes unauthenticated, which the registry answers with a bare 404;
+      # verbose output is what turns that 404 into the exchange's reason.
       - name: Publish
         if: steps.published.outputs.skip == 'false'
         run: npm publish --access public
+        env:
+          NPM_CONFIG_LOGLEVEL: verbose
