@@ -1,0 +1,27 @@
+{
+  "request": {
+    "url": "https://example.com",
+    "formats": [
+      "markdown"
+    ],
+    "escalate": true
+  },
+  "response": {
+    "status": 502,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": false,
+      "error": {
+        "code": "BLOCKED",
+        "message": "cloudflare served a challenge page instead of the content (a Cloudflare challenge script); the stealth browser did not pass it."
+      },
+      "blocked": {
+        "vendor": "cloudflare",
+        "evidence": "a Cloudflare challenge script"
+      },
+      "escalated": true
+    }
+  }
+}

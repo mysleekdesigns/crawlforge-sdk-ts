@@ -1,0 +1,57 @@
+{
+  "request": {
+    "query": "web scraping",
+    "limit": 10,
+    "lang": "en"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": true,
+      "data": {
+        "query": "mcp server for web scraping",
+        "search_metadata": {
+          "total_results": 48200,
+          "results_returned": 1,
+          "offset": 0,
+          "search_time": 0.312,
+          "lang": "en",
+          "safe_search": false,
+          "time_range": "month",
+          "site": null,
+          "file_type": null
+        },
+        "results": [
+          {
+            "title": "CrawlForge MCP Server — 30 web tools for Claude",
+            "url": "https://www.crawlforge.dev/",
+            "snippet": "Search, scrape, crawl and extract from any site through one MCP server.",
+            "displayLink": "www.crawlforge.dev",
+            "formattedUrl": "https://www.crawlforge.dev/",
+            "htmlSnippet": "Search, scrape, crawl and extract from any site through one <b>MCP server</b>.",
+            "htmlTitle": "CrawlForge <b>MCP Server</b> — 30 web tools for Claude",
+            "cacheId": "x8Kd0PqR2mUJ",
+            "pagemap": {
+              "metatags": [
+                {
+                  "og:type": "website"
+                }
+              ]
+            }
+          }
+        ],
+        "spelling_correction": "mcp server for web scraping",
+        "related_searches": [
+          "mcp web scraping tools",
+          "model context protocol scraper"
+        ]
+      },
+      "credits_used": 5,
+      "credits_remaining": 995,
+      "processing_time": 460
+    }
+  }
+}

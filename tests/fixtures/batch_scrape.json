@@ -1,0 +1,99 @@
+{
+  "request": {
+    "urls": [
+      {
+        "url": "https://example.com/widget-a",
+        "id": "a"
+      },
+      {
+        "url": "https://example.com/widget-b",
+        "id": "b"
+      },
+      {
+        "url": "https://example.com/gone",
+        "id": "c"
+      }
+    ],
+    "batch_config": {
+      "concurrency": 5
+    },
+    "extraction_template": {
+      "fields": [
+        {
+          "name": "price",
+          "selector": ".price"
+        },
+        {
+          "name": "canonical",
+          "selector": "link[rel=canonical]",
+          "attribute": "href"
+        },
+        {
+          "name": "sku",
+          "selector": "//span[@class='sku']"
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": true,
+      "data": {
+        "batch_id": "fd599a27-9ca9-4022-9a57-b02af57c387b",
+        "total": 3,
+        "succeeded": 2,
+        "failed": 1,
+        "skipped": 0,
+        "results": [
+          {
+            "id": "a",
+            "url": "https://example.com/widget-a",
+            "status": "success",
+            "http_status": 200,
+            "title": "Widget A — Acme",
+            "text": "Widget A$24.00In stock and ready to ship.",
+            "fields": {
+              "price": "$24.00",
+              "canonical": "https://example.com/widget-a",
+              "sku": null
+            },
+            "field_notes": [
+              "sku: xpath selectors are not supported on the hosted REST API — use a CSS selector"
+            ]
+          },
+          {
+            "id": "b",
+            "url": "https://example.com/widget-b",
+            "status": "success",
+            "http_status": 200,
+            "title": "Widget B — Acme",
+            "text": "Widget B$31.50Backordered until March.",
+            "fields": {
+              "price": "$31.50",
+              "canonical": "https://example.com/widget-b",
+              "sku": null
+            }
+          },
+          {
+            "id": "c",
+            "url": "https://example.com/gone",
+            "status": "failed",
+            "http_status": 404,
+            "error": "HTTP 404"
+          }
+        ],
+        "notes": [
+          "Results are stored for 24h and retrievable with get_batch_results (batch_id: fd599a27-9ca9-4022-9a57-b02af57c387b)."
+        ],
+        "completed_at": "2026-08-27T02:09:44.001Z"
+      },
+      "credits_used": 15,
+      "credits_remaining": 990,
+      "processing_time": 3140
+    }
+  }
+}

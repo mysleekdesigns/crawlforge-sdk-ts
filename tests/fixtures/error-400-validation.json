@@ -1,0 +1,39 @@
+{
+  "request": {
+    "url": "not-a-url",
+    "timeout": 5
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "content-type": "application/json",
+      "x-vercel-id": "iad1::abc12-1757246400000-0123456789ab"
+    },
+    "body": {
+      "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Invalid input parameters",
+        "details": [
+          {
+            "code": "invalid_format",
+            "format": "url",
+            "path": [
+              "url"
+            ],
+            "message": "Invalid URL format"
+          },
+          {
+            "origin": "number",
+            "code": "too_small",
+            "minimum": 1000,
+            "inclusive": true,
+            "path": [
+              "timeout"
+            ],
+            "message": "Too small: expected number to be >=1000"
+          }
+        ]
+      }
+    }
+  }
+}

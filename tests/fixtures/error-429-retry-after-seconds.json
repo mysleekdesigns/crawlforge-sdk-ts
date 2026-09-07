@@ -1,0 +1,22 @@
+{
+  "request": {
+    "url": "https://example.com"
+  },
+  "response": {
+    "status": 429,
+    "headers": {
+      "content-type": "application/json",
+      "retry-after": "2"
+    },
+    "body": {
+      "error": {
+        "code": "RATE_LIMIT_EXCEEDED",
+        "message": "Rate limit exceeded for your plan",
+        "details": {
+          "plan": "free",
+          "limit": 1
+        }
+      }
+    }
+  }
+}

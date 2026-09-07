@@ -1,0 +1,24 @@
+{
+  "request": {
+    "url": "https://example.com"
+  },
+  "response": {
+    "status": 402,
+    "headers": {
+      "content-type": "application/json",
+      "x-auto-recharge-triggered": "true"
+    },
+    "body": {
+      "error": {
+        "code": "INSUFFICIENT_CREDITS",
+        "message": "Insufficient credits. Upgrade your plan or buy a one-time credit pack at https://www.crawlforge.dev/pricing",
+        "details": {
+          "required": 1,
+          "tool": "fetch_url",
+          "autoRechargeTriggered": true,
+          "upgradeUrl": "https://www.crawlforge.dev/pricing"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "request": {
+    "url": "https://example.com",
+    "headers": {
+      "Accept": "text/html"
+    },
+    "timeout": 15000,
+    "follow_redirects": true
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": true,
+      "data": {
+        "url": "https://example.com",
+        "status": 200,
+        "status_text": "OK",
+        "headers": {
+          "content-type": "text/html; charset=UTF-8",
+          "content-length": "1256",
+          "server": "nginx"
+        },
+        "content": "<!DOCTYPE html><html><head><title>Example Domain</title>...</head><body>...</body></html>",
+        "content_length": 1256,
+        "content_type": "text/html; charset=UTF-8",
+        "redirected": false,
+        "final_url": "https://example.com",
+        "response_time_ms": 245
+      },
+      "credits_used": 1,
+      "credits_remaining": 999,
+      "processing_time": 245
+    }
+  }
+}

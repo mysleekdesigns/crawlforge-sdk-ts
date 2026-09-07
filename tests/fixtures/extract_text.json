@@ -1,0 +1,33 @@
+{
+  "request": {
+    "url": "https://example.com",
+    "selector": "article",
+    "clean": true,
+    "preserve_links": true,
+    "max_length": 5000
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": true,
+      "data": {
+        "text": "Article Title\n\nThis is the main content of the article. It contains useful information that has been extracted from the HTML.\n\nLinks:\nRelated Article (/related)",
+        "metadata": {
+          "title": "Article Title - Example Site",
+          "description": "Meta description of the article",
+          "word_count": 248,
+          "character_count": 1432,
+          "selector_used": "article",
+          "links_preserved": true,
+          "formatting_preserved": false
+        }
+      },
+      "credits_used": 1,
+      "credits_remaining": 999,
+      "processing_time": 180
+    }
+  }
+}

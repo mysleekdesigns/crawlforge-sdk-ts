@@ -1,0 +1,34 @@
+{
+  "request": {
+    "url": "https://example.com",
+    "max_depth": 2,
+    "include_external": false,
+    "timeout": 15000
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": true,
+      "data": {
+        "base_url": "https://example.com",
+        "source": "sitemap",
+        "total_pages": 128,
+        "internal_links": 128,
+        "external_links": 0,
+        "pages": [
+          "https://example.com/",
+          "https://example.com/pricing",
+          "https://example.com/docs"
+        ],
+        "max_depth_reached": null,
+        "sitemap": null
+      },
+      "credits_used": 2,
+      "credits_remaining": 998,
+      "processing_time": 1240
+    }
+  }
+}

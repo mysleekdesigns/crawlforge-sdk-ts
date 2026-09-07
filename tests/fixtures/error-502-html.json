@@ -1,0 +1,12 @@
+{
+  "request": {
+    "url": "https://example.com"
+  },
+  "response": {
+    "status": 502,
+    "headers": {
+      "content-type": "text/html; charset=utf-8"
+    },
+    "text": "<!DOCTYPE html><html><head><title>502 Bad Gateway</title></head><body><h1>Bad Gateway</h1></body></html>"
+  }
+}

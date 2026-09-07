@@ -1,0 +1,71 @@
+{
+  "request": {
+    "url": "https://example.com",
+    "formats": [
+      "markdown",
+      {
+        "type": "highlights",
+        "query": "Starter plan price per month"
+      },
+      {
+        "type": "question",
+        "question": "How much does the Starter plan cost?"
+      }
+    ],
+    "onlyMainContent": true,
+    "escalate": true
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "success": true,
+      "data": {
+        "url": "https://example.com",
+        "formats": {
+          "markdown": "# Example\n\nMain content scraped from https://example.com. The Starter plan costs $12 per month and includes three seats. Annual billing lowers the Starter plan to $10 per month.",
+          "highlights": [
+            {
+              "text": "The Starter plan costs $12 per month and includes three seats.",
+              "kind": "sentence",
+              "offset": 58,
+              "length": 62,
+              "score": 6.612
+            },
+            {
+              "text": "Annual billing lowers the Starter plan to $10 per month.",
+              "kind": "sentence",
+              "offset": 121,
+              "length": 56,
+              "score": 5.809
+            }
+          ],
+          "answer": {
+            "text": "The Starter plan costs $12 per month and includes three seats.",
+            "grounded": true,
+            "evidence": [
+              {
+                "text": "The Starter plan costs $12 per month and includes three seats.",
+                "kind": "sentence",
+                "offset": 58,
+                "length": 62,
+                "score": 6.612
+              }
+            ]
+          }
+        },
+        "escalated": true,
+        "stealth": {
+          "engine": "playwright",
+          "vendor_detected": "cloudflare"
+        },
+        "scraped_at": "2026-08-26T14:30:00.000Z"
+      },
+      "credits_used": 8,
+      "credits_remaining": 992,
+      "processing_time": 4218
+    }
+  }
+}

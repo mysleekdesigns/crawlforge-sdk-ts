@@ -1,0 +1,17 @@
+{
+  "request": {
+    "url": "https://example.com"
+  },
+  "response": {
+    "status": 401,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "error": {
+        "code": "INVALID_API_KEY",
+        "message": "Invalid API key"
+      }
+    }
+  }
+}

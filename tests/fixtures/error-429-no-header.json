@@ -1,0 +1,17 @@
+{
+  "request": {
+    "url": "https://example.com"
+  },
+  "response": {
+    "status": 429,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "error": {
+        "code": "HOST_BACKOFF",
+        "message": "example.com asked us to wait (Retry-After on a 429 or 503). 42s remain before CrawlForge will send it another request. This is the site's own instruction, so it is not overridable."
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "request": {
+    "url": "https://example.com"
+  },
+  "response": {
+    "networkError": "fetch failed"
+  }
+}
