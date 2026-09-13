@@ -20,6 +20,7 @@ export type {
   AgentRequest,
   AnalyzeContentRequest,
   BatchScrapeRequest,
+  BrowserSessionRequest,
   CrawlDeepRequest,
   DeepResearchRequest,
   ExtractContentRequest,

@@ -18,6 +18,8 @@ export type AgentRequest = components['schemas']['AgentRequest'];
 export type AnalyzeContentRequest = components['schemas']['AnalyzeContentRequest'];
 /** Request body for `POST /tools/batch_scrape` (batchScrape). */
 export type BatchScrapeRequest = components['schemas']['BatchScrapeRequest'];
+/** Request body for `POST /tools/browser_session` (browserSession). */
+export type BrowserSessionRequest = components['schemas']['BrowserSessionRequest'];
 /** Request body for `POST /tools/crawl_deep` (crawlDeep). */
 export type CrawlDeepRequest = components['schemas']['CrawlDeepRequest'];
 /** Request body for `POST /tools/deep_research` (deepResearch). */
@@ -95,6 +97,13 @@ export const TOOLS = [
     credits: 5,
     creditsNote: "5 per URL attempted (skipped URLs are not charged)",
     docsUrl: "https://www.crawlforge.dev/docs/api-reference/tools/batch-scrape",
+  },
+  {
+    name: "browser_session",
+    method: "browserSession",
+    credits: 3,
+    creditsNote: "Priced per operation, not per call: open 3, read 2, and snapshot, act, screenshot, close and list 1 each. The published 3 is the ceiling — it is what an unrecognised operation costs and what is reserved before the body is read, and the charge drops to the operation's own price. A login-then-read flow (open, snapshot, act, act, read, close) costs 9.",
+    docsUrl: "https://www.crawlforge.dev/docs/api-reference/tools/browser-session",
   },
   {
     name: "crawl_deep",
@@ -326,6 +335,16 @@ export abstract class ToolMethods {
   }
 
   /**
+   * Drive a browser across several calls, keeping the page, its cookies and its login in between. The loop is: open a session on a URL, snapshot it to list the interactive elements as refs (@e1, @e2 ...), act on those refs, read the content, close. Because the page stays open you can look before each step instead of committing to a whole chain up front, so a wrong selector costs one call rather than all of them. Not for a page that renders without interaction (scrape), and not for an interaction you can write out in advance — that is one scrape_with_actions call.
+   *
+   * Credits: 3; Priced per operation, not per call: open 3, read 2, and snapshot, act, screenshot, close and list 1 each. The published 3 is the ceiling — it is what an unrecognised operation costs and what is reserved before the body is read, and the charge drops to the operation's own price. A login-then-read flow (open, snapshot, act, act, read, close) costs 9..
+   * @see https://www.crawlforge.dev/docs/api-reference/tools/browser-session
+   */
+  browserSession(params: BrowserSessionRequest, options?: RequestOptions): Promise<ToolResult> {
+    return this.call("browser_session", params, options);
+  }
+
+  /**
    * Crawl websites deeply using breadth-first search to discover and extract content
    *
    * Credits: 4.
@@ -500,7 +519,7 @@ export abstract class ToolMethods {
   }
 
   /**
-   * Search Reddit posts/comments or read a full comment thread — reads the Arctic Shift community archive (reddit.com blocks direct scraping). A scoped search (subreddit or author) queries the archive directly. A Reddit-wide keyword search finds posts with a site-restricted web search and then reads those posts from the archive — or, in comments mode, searches each of the first five posts' comments for the keywords — because Arctic Shift cannot keyword-search across all of Reddit. A scoped comment search Arctic Shift times out on is retried over the last 7d and 3d and reports window_applied. PullPush stopped serving automated clients in August 2026 and is no longer tried automatically.
+   * Search Reddit posts/comments or read a full comment thread — reads the Arctic Shift community archive (reddit.com blocks direct scraping). A scoped search (subreddit or author) queries the archive directly. A Reddit-wide keyword search finds posts with a site-restricted web search and then reads those posts from the archive — or, in comments mode, searches each of the first five posts' comments for the keywords — because Arctic Shift cannot keyword-search across all of Reddit. A scoped comment search Arctic Shift times out on is retried over the last 7d and 3d and reports window_applied. Arctic Shift is tried first and PullPush (api.pullpush.io) second: when Arctic Shift or the web-discovery path fails a posts or comments search, PullPush is queried and the response reports fallback_used. PullPush has refused automated clients since August 2026, so that fallback usually reports its refusal too.
    *
    * Credits: 5.
    * @see https://www.crawlforge.dev/docs/api-reference/tools/reddit-search
@@ -594,7 +613,7 @@ export abstract class ToolMethods {
   }
 
   /**
-   * Detect content changes on a page by comparing it against a stored baseline (create_baseline, then compare)
+   * Detect content changes on a page by comparing it against a stored baseline (create_baseline, then compare), or create a hosted monitor that checks it on a schedule (monitor)
    *
    * Credits: 3.
    * @see https://www.crawlforge.dev/docs/api-reference/tools/track-changes

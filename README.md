@@ -1,7 +1,7 @@
 # crawlforge-sdk
 
 The official TypeScript SDK for the [CrawlForge REST API](https://www.crawlforge.dev/docs/api-reference):
-30 metered web tools (fetch, scrape, search, crawl, extract, research) behind one API key.
+31 metered web tools (fetch, scrape, search, crawl, extract, research) behind one API key.
 
 - One typed method per tool, generated from the [OpenAPI specification](https://www.crawlforge.dev/openapi.json).
 - Typed errors for validation, authentication, credits, rate limits and tool failures.
@@ -69,6 +69,7 @@ conditional price says so in the credits column and on its docs page. Request pa
 | `agent()` | `agent` | 8 | [agent](https://www.crawlforge.dev/docs/api-reference/tools/agent) |
 | `analyzeContent()` | `analyze_content` | 3 | [analyze_content](https://www.crawlforge.dev/docs/api-reference/tools/analyze-content) |
 | `batchScrape()` | `batch_scrape` | 5; 5 per URL attempted (skipped URLs are not charged) | [batch_scrape](https://www.crawlforge.dev/docs/api-reference/tools/batch-scrape) |
+| `browserSession()` | `browser_session` | 3; Priced per operation, not per call: open 3, read 2, and snapshot, act, screenshot, close and list 1 each. The published 3 is the ceiling — it is what an unrecognised operation costs and what is reserved before the body is read, and the charge drops to the operation's own price. A login-then-read flow (open, snapshot, act, act, read, close) costs 9. | [browser_session](https://www.crawlforge.dev/docs/api-reference/tools/browser-session) |
 | `crawlDeep()` | `crawl_deep` | 4 | [crawl_deep](https://www.crawlforge.dev/docs/api-reference/tools/crawl-deep) |
 | `deepResearch()` | `deep_research` | 10 | [deep_research](https://www.crawlforge.dev/docs/api-reference/tools/deep-research) |
 | `extractContent()` | `extract_content` | 2 | [extract_content](https://www.crawlforge.dev/docs/api-reference/tools/extract-content) |

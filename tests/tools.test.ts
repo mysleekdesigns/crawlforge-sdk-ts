@@ -37,6 +37,7 @@ const CONTRACT_METHODS: Record<string, string> = {
   crawl_deep: 'crawlDeep',
   stealth_mode: 'stealthMode',
   scrape_with_actions: 'scrapeWithActions',
+  browser_session: 'browserSession',
   batch_scrape: 'batchScrape',
   search_web: 'searchWeb',
   reddit_search: 'redditSearch',
@@ -49,7 +50,7 @@ const CONTRACT_METHODS: Record<string, string> = {
 describe('TOOLS table', () => {
   it('has exactly one entry per /tools/<tool> path in openapi.json, in path order', () => {
     const paths = Object.keys(spec.paths).map((p) => p.replace(/^\/tools\//, ''));
-    expect(paths).toHaveLength(30);
+    expect(paths).toHaveLength(31);
     expect(TOOLS.map((t) => t.name)).toEqual(paths);
   });
 
@@ -98,7 +99,7 @@ describe('generated methods', () => {
 describe('request types', () => {
   it('exist for every <Tool>Request schema and stay usable object types', () => {
     const schemas = Object.keys(spec.components.schemas).filter((n) => n.endsWith('Request'));
-    expect(schemas).toHaveLength(30);
+    expect(schemas).toHaveLength(31);
     const index = readFileSync(new URL('../src/index.ts', import.meta.url), 'utf8');
     for (const name of schemas) expect(index, name).toMatch(new RegExp(`\\b${name},`));
 
